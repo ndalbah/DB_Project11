@@ -1,0 +1,1146 @@
+SQL> 
+SQL> -- clearwater
+SQL> @ C:\NRD_L11\7clearwater.sql
+Connected.
+
+User dropped.
+
+
+User created.
+
+
+Grant succeeded.
+
+
+User altered.
+
+Connected.
+DROP TABLE order_line CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+DROP TABLE shipment_line CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+DROP TABLE shipment CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+DROP TABLE inventory CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+DROP TABLE color CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+DROP TABLE item CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+DROP TABLE category CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+DROP TABLE orders CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+DROP TABLE order_source CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+DROP TABLE customer CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+Commit complete.
+
+SQL> 
+SQL> -- Question #1
+SQL> SELECT item_desc
+  2  FROM item
+  3  WHERE item_id IN (SELECT item_id
+  4  FROM inventory
+  5  WHERE inv_id IN(SELECT inv_id
+  6  FROM order_line
+  7  WHERE o_id IN(SELECT o_id
+  8  FROM orders
+  9  WHERE os_id = (SELECT os_id
+ 10  FROM order_source
+ 11  WHERE os_desc ='Web Site')))) UNION SELECT distinct item_desc
+ 12  FROM inventory, item
+ 13  WHERE item.item_id = inventory.item_id AND inv_id IN (SELECT inv_id
+ 14  FROM shipment_line
+ 15  WHERE sl_date_received is not NULL);
+
+ITEM_DESC                                                                       
+------------------------------                                                  
+3-Season Tent                                                                   
+Children's Beachcomber Sandals                                                  
+Men's Expedition Parka                                                          
+Women's Fleece Pullover                                                         
+Women's Hiking Shorts                                                           
+
+SQL> 
+SQL> -- northwoods
+SQL> @ C:\NRD_L11\7Northwoods.sql
+Connected.
+
+User dropped.
+
+
+User created.
+
+
+Grant succeeded.
+
+
+User altered.
+
+Connected.
+DROP TABLE enrollment CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+DROP TABLE course_section CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+DROP TABLE term CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+DROP TABLE course CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+DROP TABLE student CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+DROP TABLE faculty CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+DROP TABLE location CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+Commit complete.
+
+SQL> 
+SQL> -- Question #2
+SQL> SELECT course_name
+  2  FROM course
+  3  WHERE course_id IN (SELECT course_id
+  4  FROM course_section
+  5  WHERE c_sec_id IN (SELECT c_sec_id
+  6  FROM enrollment
+  7  WHERE s_id = (SELECT s_id
+  8  FROM student
+  9  WHERE s_last = 'Miller' AND s_first = 'Sarah'))) INTERSECT SELECT course_name
+ 10  FROM course
+ 11  WHERE course_id IN (SELECT course_id
+ 12  FROM course_section
+ 13  WHERE c_sec_id IN (SELECT c_sec_id
+ 14  FROM enrollment
+ 15  WHERE s_id = (SELECT s_id
+ 16  FROM student
+ 17  WHERE s_last = 'Umato' AND s_first = 'Brian')));
+
+COURSE_NAME                                                                     
+-------------------------                                                       
+Database Management                                                             
+Intro. to Info. Systems                                                         
+Systems Analysis                                                                
+Web-Based Systems                                                               
+
+SQL> 
+SQL> -- Question #3
+SQL> SELECT course_name
+  2  FROM course
+  3  WHERE course_id IN (SELECT course_id
+  4  FROM course_section
+  5  WHERE c_sec_id IN (SELECT c_sec_id
+  6  FROM enrollment
+  7  WHERE s_id = (SELECT s_id
+  8  FROM student
+  9  WHERE s_last = 'Miller' AND s_first = 'Sarah'))) MINUS SELECT course_name
+ 10  FROM course
+ 11  WHERE course_id IN (SELECT course_id
+ 12  FROM course_section
+ 13  WHERE c_sec_id IN (SELECT c_sec_id
+ 14  FROM enrollment
+ 15  WHERE s_id = (SELECT s_id
+ 16  FROM student
+ 17  WHERE s_last = 'Umato' AND s_first = 'Brian')));
+
+no rows selected
+
+SQL> 
+SQL> -- Question #4
+SQL> SELECT 'Faculty' AS source_table, s_first "First Name", s_last "Last Name"
+  2  FROM student
+  3  UNION SELECT 'Student' AS source_table, f_first "First Name", f_last "Last Name"
+  4  FROM faculty;
+
+SOURCE_ First Name                     Last Name                                
+------- ------------------------------ ------------------------------           
+Faculty Amanda                         Mobley                                   
+Faculty Brian                          Umato                                    
+Faculty Daniel                         Black                                    
+Faculty Michael                        Connoly                                  
+Faculty Ruben                          Sanchez                                  
+Faculty Sarah                          Miller                                   
+Student Jerry                          Williams                                 
+Student John                           Blanchard                                
+Student Kim                            Cox                                      
+Student Laura                          Sheng                                    
+Student Philip                         Brown                                    
+
+11 rows selected.
+
+SQL> 
+SQL> -- software expert
+SQL> @ C:\NRD_L11\7Software.sql
+Connected.
+
+User dropped.
+
+
+User created.
+
+
+Grant succeeded.
+
+
+User altered.
+
+Connected.
+DROP TABLE evaluation CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+DROP TABLE project_consultant CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+DROP TABLE project_skill CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+DROP TABLE project CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+DROP TABLE client CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+DROP TABLE consultant_skill CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+DROP TABLE skill CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+DROP TABLE consultant CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table altered.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+Commit complete.
+
+SQL> 
+SQL> -- Question #5
+SQL> SELECT skill_description
+  2  FROM skill
+  3  WHERE skill_id IN (SELECT skill_id
+  4  FROM consultant_skill
+  5  WHERE c_id = (SELECT c_id
+  6  FROM consultant
+  7  WHERE c_first = 'Sarah' AND c_last = 'Carlson')) MINUS
+  8  SELECT skill_description
+  9  FROM skill
+ 10  WHERE skill_id IN (SELECT skill_id
+ 11  FROM consultant_skill
+ 12  WHERE c_id = (SELECT c_id
+ 13  FROM consultant
+ 14  WHERE c_first = 'Mark' AND c_last = 'Myers'));
+
+SKILL_DESCRIPTION                                                               
+--------------------------------------------------                              
+Windows NT/2000 Network Administration                                          
+Windows XP Network Administration                                               
+
+SQL> 
+SQL> -- Save spool
+SQL> SPOOL OFF;
